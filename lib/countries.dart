@@ -32,25 +32,34 @@ class Countries {
       value: (k) => _codes[k]
     ).keys;
 
-    return code.isEmpty? null: code.elementAt(0);
+    return code.isEmpty? code: code.elementAt(0);
   }
 
   /// Public methods ==============================================
 
   /// Returns <Map> of country data using alpha2 code as identifier
   /// e.g. countries.findByCode('GB');
-  findByCode(String code) {
-    code = code.toUpperCase();
-    if (countryData.containsKey(code)) {
-      countryData[code]['code'] = code;
-      return countryData[code];
+  code(String query) {
+    query = query.toUpperCase();
+    if (countryData.containsKey(query)) {
+      countryData[query]['code'] = query;
+      return countryData[query];
     }
   }
 
   /// Returns <Map> of country data using country name as identifier
   /// e.g. countries.findByName('United Kingdom');
-  findByName(String name) {
-    String code = _nameToAlpha2(name);
-    return code.isEmpty? null: findByCode(code);
+  name(String query) {
+    String alpha2 = _nameToAlpha2(query);
+    return alpha2.isEmpty? null: code(alpha2);
   }
+
+  list({ bool minified: true }) {
+    if ( minified ) {
+      return _codes;
+    } else {
+      return countryData;
+    }
+  }
+
 }
