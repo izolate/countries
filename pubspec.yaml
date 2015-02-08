@@ -1,0 +1,6 @@
+name: countries
+version: 0.0.1
+description: Useful data for every country in the ISO 3166 standard
+author: izolate <izolate@gmail.com>
+dependencies:
+  yaml: '>=2.1.2 <3.0.0'
